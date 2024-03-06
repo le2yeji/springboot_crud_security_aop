@@ -1,8 +1,10 @@
 package com.kt.edu.thirdproject.common.controller;
 
 
+import com.kt.edu.thirdproject.common.config.RsaUtil;
 import com.kt.edu.thirdproject.common.domain.JwtRequest;
 import com.kt.edu.thirdproject.common.domain.JwtResponse;
+import com.kt.edu.thirdproject.common.service.DecryptService;
 import com.kt.edu.thirdproject.common.service.JwtUserDetailsService;
 import com.kt.edu.thirdproject.common.util.JwtTokenUtil;
 
@@ -32,8 +34,24 @@ public class JwtAuthenticationController {
     //@Autowired
     private final JwtUserDetailsService userDetailsService;
 
+
+
     @PostMapping("/api/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+        log.info("[{}] ***************authenticationRequest start",authenticationRequest);
+//        // SHA256 PW비교 START
+//        if ("db03de15b8000fc35ad975c1322f98124a22521e0616a55c926807eb7225fa38".equals(authenticationRequest.getPassword())) {
+//            authenticationRequest.setPassword("edu1234");
+//        }
+//        // SHA256 PW비교 END
+        // RSA 복호화 진행
+        DecryptService decryptService = new DecryptService();
+
+        String decryptedData = decryptService.login(authenticationRequest.getPassword());
+        authenticationRequest.setPassword(decryptedData);
+        log.info("authenticationRequest.getPassword(): " + authenticationRequest.getPassword());
+        // RSA 복호화 진행 끝
+        log.info("[{}] ***************authenticationRequest end",authenticationRequest);
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
         final UserDetails userDetails = userDetailsService

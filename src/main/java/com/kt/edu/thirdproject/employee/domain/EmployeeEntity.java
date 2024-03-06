@@ -45,17 +45,4 @@ public class EmployeeEntity implements Persistable<Long> {
 
     @Override
     public boolean isNew() { return isNew; }
-
-    //@Override
-    /*public Long getId(){
-        return id;
-    }*/
-
-    /*public static EmployeeEntity of(Article article) throws Exception {
-        return EmployeeEntity.builder()
-                .id(article.getId())
-                .title(article.getTitle())
-                .content(article.getContent())
-                .build();
-    }*/
 }

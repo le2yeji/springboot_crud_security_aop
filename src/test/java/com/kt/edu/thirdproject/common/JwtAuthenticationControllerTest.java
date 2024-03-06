@@ -3,8 +3,8 @@ package com.kt.edu.thirdproject.common;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kt.edu.thirdproject.common.controller.JwtAuthenticationController;
 import com.kt.edu.thirdproject.common.domain.JwtRequest;
-import com.kt.edu.thirdproject.employee.repository.EmployeeRepository;
-import com.kt.edu.thirdproject.employee.service.EmployeeService;
+import com.kt.edu.thirdproject.employee.query.EmployeeQueryService;
+import com.kt.edu.thirdproject.employee.query.EmployeeQueryRepository;
 import org.junit.jupiter.api.Test;
 import com.kt.edu.thirdproject.common.service.JwtUserDetailsService;
 import com.kt.edu.thirdproject.common.util.JwtTokenUtil;
@@ -46,7 +46,7 @@ public class JwtAuthenticationControllerTest {
     private JwtTokenUtil jwtTokenUtil;
 
     @MockBean
-    private EmployeeService employeeService;
+    private EmployeeQueryService employeeQueryService;
 
     //@Autowired
     //private ObjectMapper objectMapper;

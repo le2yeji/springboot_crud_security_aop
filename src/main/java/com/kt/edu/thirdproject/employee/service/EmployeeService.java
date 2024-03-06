@@ -24,7 +24,7 @@ public class EmployeeService {
     // spring profile
     @Value("${spring.profiles.active}")
     private String activeProfile;
-    
+
     // jasypt로 저장된 비밀번호가  복호화 된다.
     @Value("${spring.datasource.password}")
     private String h2Password;
@@ -52,7 +52,7 @@ public class EmployeeService {
     @Transactional
     public EmployeeEntity create(EmployeeEntity employeeEntity) {
         log.info("Request to create Employee : " +  employeeEntity);
-        
+
         log.info("Active Springboot Profile : " + activeProfile );
 
         if (activeProfile.equals("prd")){ // maria, mysql
